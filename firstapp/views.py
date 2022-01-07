@@ -1,10 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.template.response import TemplateResponse
 
 
 def index(request):
-    return HttpResponse('<h2>Главная</h2>')
+    header = 'personal data'
+    langs = ['english', 'german', 'hispanic']
+    user = {'name': 'maxim', 'age': 20}
+    address = ('vinogradnaya', 23, 45)
+    data = {'header': header, 'langs': langs, 'user': user, 'address': address}
+    return render(request, 'index.html', context=data)
 
 
 def about(request):
@@ -12,7 +17,7 @@ def about(request):
 
 
 def contact(request):
-    return HttpResponse('<h2>контакты</h2>')
+    return HttpResponseRedirect('/about')
 
 
 def products(request, productid):
@@ -26,3 +31,7 @@ def users(request):
     name = request.GET.get('name', 'мася')
     output = '<h2>Пользователь</h2><h3>id: {0} Имя:{1}</h3>'.format(id, name)
     return HttpResponse(output)
+
+
+def details(request):
+    return HttpResponsePermanentRedirect('/')

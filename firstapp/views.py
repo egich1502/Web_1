@@ -4,12 +4,7 @@ from django.template.response import TemplateResponse
 
 
 def index(request):
-    header = 'personal data'
-    langs = ['english', 'german', 'hispanic']
-    user = {'name': 'maxim', 'age': 20}
-    address = ('vinogradnaya', 23, 45)
-    data = {'header': header, 'langs': langs, 'user': user, 'address': address}
-    return render(request, 'index.html', context=data)
+    return render(request, 'firstapp/index.html')
 
 
 def about(request):

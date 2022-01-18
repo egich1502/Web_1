@@ -1,4 +1,19 @@
 {% extends 'firstapp/base.html' %}
 {% block title %}Index{% endblock title %}
 {% block header %}Главная страница{% endblock header %}
-{% block content %}Связка шаблонов index.html и base.html{% endblock content %}
+{% block content %}
+    <p>product categories</p>
+    {% for i in data %}
+        <li>{{ i }}</li>
+        {% empty %}
+        <p>Categories is missing</p>
+    {% endfor %}
+
+    {% with name="Чайхана" num=1 %}
+        <div>
+            <p>При магазине работает {{ name }}</p>
+            <p>Номер {{ num }}</p>
+        </div>
+    {% endwith %}
+
+{% endblock content %}

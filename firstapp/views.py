@@ -4,7 +4,8 @@ from django.template.response import TemplateResponse
 
 
 def index(request):
-    return render(request, 'firstapp/index.html')
+    data = ['notebook', 'printer', 'scaner', 'discs', 'cables']
+    return render(request, 'firstapp/index.html', context={'data': data})
 
 
 def about(request):

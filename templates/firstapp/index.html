@@ -1,19 +1,35 @@
-{% extends 'firstapp/base.html' %}
-{% block title %}Index{% endblock title %}
-{% block header %}Главная страница{% endblock header %}
-{% block content %}
-    <p>product categories</p>
-    {% for i in data %}
-        <li>{{ i }}</li>
-        {% empty %}
-        <p>Categories is missing</p>
-    {% endfor %}
-
-    {% with name="Чайхана" num=1 %}
-        <div>
-            <p>При магазине работает {{ name }}</p>
-            <p>Номер {{ num }}</p>
-        </div>
-    {% endwith %}
-
-{% endblock content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Модели в Django</title>
+</head>
+<body class="container">
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите имя</label><br>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>Введите возраст</label><br>
+            <input type="number" name="age" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if people.count > 0 %}
+    <h2>Список пользователей</h2>
+    <table>
+        <tr><th>Id</th><th>Имя</th><th>Возраст</th></tr>
+        {% for person in people %}
+        <tr><td>{{ person.id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td><a href="edit/{{ person.id }}">Change</a> |
+                <a href="delete/{{ person.id }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
